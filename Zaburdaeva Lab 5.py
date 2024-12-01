@@ -32,10 +32,12 @@ with open('task3.txt', 'r', encoding='utf-8') as file:
     table = file.read()
 
 ids = re.findall(r'\b\d+\b', table) 
-surnames = re.findall(r'\b[A-Za-zА-Яа-яЁё]+\b', table)  
-emails = re.findall(r'([\w.%+-]+@[\w.-]+\.[a-zA-Z]{2,})', table)
+surnames = re.findall(r'[A-Z][a-z]+(?!\d\d@|@)', table)  
+table = re.sub(r'[A-Z][a-z]+(?!\d\d@|@)', ' ', table)
+emails = re.findall(r'[a-z][a-z0-9-]*@[a-z0-9-]+\.[netcombizinfoorg]{3}o?', table)
 dates = re.findall(r'(\b\d{1,2}[-/.]\d{1,2}[-/.]\d{2,4}\b|\b\d{4}[-/.]\d{1,2}[-/.]\d{1,2}\b)', table)
-addresses = re.findall(r'(https?://[^\s]+)', table)
+addresses = re.findall(r'https?://[a-zA-Z0-9.-]+/', table)
+table = re.sub(r'https?://[a-zA-Z0-9.-]+/', ' ', table)
 
 new_table = []
 num_entries = min(len(ids), len(surnames), len(emails), len(dates), len(addresses))
