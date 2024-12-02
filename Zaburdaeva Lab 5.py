@@ -58,9 +58,9 @@ print("Данные сохранены в файл new.csv :)")
 with open('task_add.txt', 'r', encoding='utf-8') as file:
     symbols = file.read()
 
-dates = re.findall (r'(\b\d{1,2}[-/.]\d{1,2}[-/.]\d{2,4}\b|\b\d{4}[-/.]\d{1,2}[-/.]\d{1,2}\b)', symbols)
-emails = re.findall(r'([\w.%+-]+@[\w.-]+\.[a-zA-Z]{2,})',symbols)
-adresses = re.findall(r'(https?://[^\s]+)',symbols)
+dates = re.findall (r'\b(?:(?:\d{1,2}[-/.]\d{1,2}[-/.]\d{2,4})|(?:\d{4}[-/.]\d{1,2}[-/.]\d{1,2})|(?:\d{1,2}\s+[a-zA-Z]{3,9}\s+\d{2,4})|(?:[a-zA-Z]{3,9}\s+\d{1,2},\s+\d{4})\b)', symbols)
+emails = re.findall(r'\s([\w.%+-]+@[\w.-]+\.[a-zA-Z]{2,})',symbols)
+adresses = re.findall(r'\s(https?://[^\s]+)',symbols)
 
 fragments = []
 
@@ -71,5 +71,8 @@ for email in emails[:5]:
 for adress in adresses[:5]:
     fragments.append(['Сайт',adress])
 
+
+
 for name, item in fragments:
     print(f'{name}: {item}')
+
