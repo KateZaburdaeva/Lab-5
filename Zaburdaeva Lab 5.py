@@ -68,7 +68,7 @@ with open('task_add.txt', 'r', encoding='utf-8') as file:
 
 dates = re.findall (r'\b(?:(?:\d{1,2}[-/.]\d{1,2}[-/.]\d{2,4})|(?:\d{4}[-/.]\d{1,2}[-/.]\d{1,2})|(?:\d{1,2}\s+[a-zA-Z]{3,9}\s+\d{2,4})|(?:[a-zA-Z]{3,9}\s+\d{1,2},\s+\d{4})\b)', symbols)
 emails = re.findall(r'\s([\w.%+-]+@[\w.-]+\.[a-zA-Z]{2,})',symbols)
-adresses = re.findall(r'\s(https?://[^\s]+)',symbols)
+adresses = re.findall(r'\s(https?://[a-zA-Z0-9.-]+)',symbols)
 
 fragments = []
 
