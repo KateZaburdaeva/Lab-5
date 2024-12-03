@@ -31,13 +31,21 @@ print("Все открывающиеся теги без повторений:",
 with open('task3.txt', 'r', encoding='utf-8') as file:
     table = file.read()
 
-ids = re.findall(r'\b\d+\b', table) 
 surnames = re.findall(r'[A-Z][a-z]+(?!\d\d@|@)', table)  
 table = re.sub(r'[A-Z][a-z]+(?!\d\d@|@)', ' ', table)
-emails = re.findall(r'[a-z][a-z0-9-]*@[a-z0-9-]+\.[netcombizinfoorg]{3}o?', table)
-dates = re.findall(r'(\b\d{1,2}[-/.]\d{1,2}[-/.]\d{2,4}\b|\b\d{4}[-/.]\d{1,2}[-/.]\d{1,2}\b)', table)
+emails = re.findall(r'[a-z][a-z0-9-]*@[a-z0-9-]+\.[a-z]{2,}', table)
+dates = re.findall(r'\d{4}-\d{2}-\d{2}', table)
 addresses = re.findall(r'https?://[a-zA-Z0-9.-]+/', table)
 table = re.sub(r'https?://[a-zA-Z0-9.-]+/', ' ', table)
+
+ids = []
+id = 1
+while True:
+    if str(id) in table:
+        ids.append(id)
+        id += 1
+    else:
+        break
 
 new_table = []
 num_entries = min(len(ids), len(surnames), len(emails), len(dates), len(addresses))
